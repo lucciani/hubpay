@@ -1,12 +1,16 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Logger, Res } from '@nestjs/common';
+import { ApiExcludeEndpoint } from '@nestjs/swagger';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
+  @ApiExcludeEndpoint()
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getDocs(@Res() res?: any) {
+    Logger.log(`Iniciando swagger`);
+    return res
+      .status(302)
+      .redirect(
+        `http://${process.env.HOST}:${process.env.PORT}/${process.env.GLOBAL_PREFIX}/docs`,
+      );
   }
 }
