@@ -1,3 +1,5 @@
+import { EmpresaEntity } from '@domain/model/empresa.entity';
+import { UsuarioEntity } from '@domain/model/usuario.entity';
 import { registerAs } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
@@ -9,11 +11,13 @@ function typeormModuleOptions(): TypeOrmModuleOptions {
     database: process.env.DB_NAME,
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
-    logging: process.env.ENV === 'development' ? true : false,
-    entities: [],
+    logging: process.env.ENV === 'development',
+    entities: [EmpresaEntity, UsuarioEntity],
     synchronize: process.env.ENV === 'development',
-    autoLoadEntities: process.env.ENV === 'development' ? true : false,
+    autoLoadEntities: process.env.ENV === 'development',
     retryAttempts: 10,
+    extra: { charset: 'utf8mb4_unicode_ci' },
+    migrationsRun: true,
   };
 }
 

@@ -38,7 +38,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
         path: request.url,
       });
     } else if (status === HttpStatus.UNAUTHORIZED) {
-      const err = JSON.parse(JSON.stringify(exception.getResponse()));
+      const err = JSON.parse(JSON.stringify(exception?.getResponse()));
 
       response.status(status).json({
         status,
@@ -48,7 +48,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
         path: request.url,
       });
     } else {
-      const err = JSON.parse(JSON.stringify(exception.getResponse()));
+      const err = JSON.parse(JSON.stringify(exception)); //JSON.parse(JSON.stringify(exception?.getResponse()));
       response.status(status).json({
         status,
         message,

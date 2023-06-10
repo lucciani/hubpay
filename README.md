@@ -22,41 +22,59 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Descrição
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Projeto de uma API para consumo de um gateway de pagamento.
 
-## Installation
-
-```bash
-$ npm install
-```
-
-## Running the app
+## Instalação Mysql
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+docker run --name mysql8 --restart unless-stopped -p 3306:3306 -v mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:8
 ```
 
-## Test
+## Instalação depêndencias
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
+
+## Migration
+
+Na raiz do projeto executar os comandos abaixo:
+Para os arquivos de migration criar as tabelas no banco.
+
+```bash
+npm run migrate:up
+```
+
+Para criar nova migration executar o comando, basta substituir o NOME_MIGRATION:
+
+```bash
+npm run migrate:create --name={NOME_MIGRATION}
+```
+
+## Inicia a API
+
+Sistemas windows executar o comando abaixo:
+
+```bash
+npm run start:win
+```
+
+Sistemas linux executar o comando abaixo:
+
+```bash
+npm run start:dev
+```
+
+## Acesso ao Swagger da API
+
+URL: http://localhost:3030/hubpay/docs<br>
+User: Adm<br>
+Senha: 123456<br>
+
+OBS: o arquivo .env.development possui as env para execução do projeto.
+Caso já possua um mysql local, basta substituir os parametros -p (porta) para uma porta local disponível.
 
 ## Support
 
