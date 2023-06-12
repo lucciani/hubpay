@@ -1,4 +1,4 @@
-import { BuscarUsuarioUseCase } from '@domain/service/usuario/use-cases/buscar-usuario.usecase';
+import { BuscarUsuarioUseCase } from '@domain/service/usuario/use-cases/buscar-usuario/buscar-usuario.usecase';
 import {
   Controller,
   Get,

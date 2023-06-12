@@ -2,7 +2,7 @@
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { addTime, convertToUTC } from '@core/utils/date-provider';
-import { ExistUsuarioUseCase } from '@domain/service/usuario/use-cases/exist-usuario.usecase';
+import { ExistUsuarioUseCase } from '@domain/service/usuario/use-cases/exist-usuario/exist-usuario.usecase';
 import {
   EXPIRES_REFRESH_TOKEN,
   EXPIRES_TOKEN,

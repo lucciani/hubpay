@@ -1,18 +1,15 @@
 ﻿import { IUsuarioRepository } from '@domain/repository/usuario.repository';
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
-import { BuscarUsuarioMapper } from '../mapper/buscar-usuario.mapper';
 import { BuscarUsuarioResponseDTO } from '@api/model/usuario/response/buscar-usuario.response';
 
 @Injectable()
 export class BuscarUsuarioUseCase {
   private readonly logger = new Logger(BuscarUsuarioUseCase.name);
-  private readonly buscarUsuarioMapper: BuscarUsuarioMapper;
 
-  constructor(private readonly usuarioRepository: IUsuarioRepository) {
-    this.buscarUsuarioMapper = new BuscarUsuarioMapper();
-  }
+  constructor(private readonly usuarioRepository: IUsuarioRepository) {}
 
   async execute(usuarioId: number): Promise<BuscarUsuarioResponseDTO> {
+    this.logger.log(`Preparando o BuscarUsuarioUseCase...`);
     const usuario = await this.usuarioRepository.buscarUsuario(usuarioId);
 
     if (!usuario) {
@@ -21,8 +18,12 @@ export class BuscarUsuarioUseCase {
       );
     }
 
-    const usuarioMapper = await this.buscarUsuarioMapper.mapFrom(usuario);
+    const {
+      id,
+      secretId: secretIdAtual,
+      empresa: { id: empresaId, nome },
+    } = usuario;
 
-    return usuarioMapper;
+    return new BuscarUsuarioResponseDTO(id, secretIdAtual, empresaId, nome);
   }
 }

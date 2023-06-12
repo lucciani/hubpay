@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { AuthenticateUsuarioUseCase } from '@domain/service/usuario/use-cases/authenticate.usecase';
+import { AuthenticateUsuarioUseCase } from '@domain/service/usuario/use-cases/authenticate/authenticate.usecase';
 import { TokenResponse } from '@api/model/auth/response/token.response';
 import { CredentialsApiDTO } from '@api/model/auth/request/credentials-api.request';
 import { AuthApi, Authenticate } from './openapi/auth-swagger';

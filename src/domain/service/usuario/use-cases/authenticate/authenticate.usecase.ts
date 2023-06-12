@@ -1,22 +1,24 @@
 ﻿import { IUsuarioRepository } from '@domain/repository/usuario.repository';
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
-import { BuscarUsuarioMapper } from '../mapper/buscar-usuario.mapper';
 import * as bcrypt from 'bcrypt';
 import { AuthenticateResponseDTO } from '@api/model/auth/response/authenticate.response';
+import { ConfigService } from '@nestjs/config';
+import { SALT_KEY } from '@core/config/constants';
 
 @Injectable()
 export class AuthenticateUsuarioUseCase {
   private readonly logger = new Logger(AuthenticateUsuarioUseCase.name);
-  private readonly buscarUsuarioMapper: BuscarUsuarioMapper;
 
-  constructor(private readonly usuarioRepository: IUsuarioRepository) {
-    this.buscarUsuarioMapper = new BuscarUsuarioMapper();
-  }
+  constructor(
+    private readonly usuarioRepository: IUsuarioRepository,
+    private readonly configService: ConfigService,
+  ) {}
 
   async execute(
     secretId: string,
     secret: string,
   ): Promise<AuthenticateResponseDTO> {
+    this.logger.log(`Preparando o AuthenticateUsuarioUseCase...`);
     const usuario = await this.usuarioRepository.aunthenticUsuario(secretId);
 
     if (!usuario) {
@@ -26,7 +28,9 @@ export class AuthenticateUsuarioUseCase {
       );
     }
 
-    const passwordMatch = await bcrypt.compare(secret, usuario.secret);
+    const password = `${secret}${this.configService.get(SALT_KEY)}`;
+
+    const passwordMatch = await bcrypt.compare(password, usuario.secret);
 
     if (!passwordMatch) {
       throw new HttpException(
