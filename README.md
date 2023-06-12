@@ -53,7 +53,7 @@ Para criar nova migration executar o comando, basta substituir o NOME_MIGRATION:
 npm run migrate:create --name={NOME_MIGRATION}
 ```
 
-## Inicia a API
+## Iniciar a API
 
 Sistemas windows executar o comando abaixo:
 
@@ -73,8 +73,14 @@ URL: http://localhost:3030/hubpay/docs<br>
 User: Adm<br>
 Senha: 123456<br>
 
-OBS: o arquivo .env.development possui as env para execução do projeto.
-Caso já possua um mysql local, basta substituir os parametros -p (porta) para uma porta local disponível.
+## Variaveis de ambientes
+
+O Arquivo .env.example tem a base dos valores das variaveis de ambiente do projeto. Algumas variaveis são sensiveis para expor, portanto favor substituir as env chave da api.<br>
+
+* SALT_KEY: tem como objetivo concatenar a senha do usuário para o bcrypt retornar um hash mais seguro
+* SECRET: chave para validação do acess_token da api.
+* SECRET_REFRESH_TOKEN: chave para validação do refresh_token da api.
+
 
 ## Support
 
