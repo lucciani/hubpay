@@ -6,7 +6,7 @@ export class AppController {
   @ApiExcludeEndpoint()
   @Get()
   getDocs(@Res() res?: any) {
-    Logger.log(`Iniciando swagger`);
+    Logger.debug(`Iniciando swagger`);
     return res
       .status(302)
       .redirect(

@@ -9,8 +9,8 @@ export class BuscarUsuarioUseCase {
   constructor(private readonly usuarioRepository: IUsuarioRepository) {}
 
   async execute(usuarioId: number): Promise<BuscarUsuarioResponseDTO> {
-    this.logger.log(`Preparando o BuscarUsuarioUseCase...`);
-    const usuario = await this.usuarioRepository.buscarUsuario(usuarioId);
+    this.logger.debug(`Preparando o BuscarUsuarioUseCase...`);
+    const usuario = await this.usuarioRepository.findById(usuarioId);
 
     if (!usuario) {
       throw new NotFoundException(

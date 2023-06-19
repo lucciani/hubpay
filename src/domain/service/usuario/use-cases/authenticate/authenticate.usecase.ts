@@ -18,7 +18,7 @@ export class AuthenticateUsuarioUseCase {
     secretId: string,
     secret: string,
   ): Promise<AuthenticateResponseDTO> {
-    this.logger.log(`Preparando o AuthenticateUsuarioUseCase...`);
+    this.logger.debug(`Preparando o AuthenticateUsuarioUseCase...`);
     const usuario = await this.usuarioRepository.aunthenticUsuario(secretId);
 
     if (!usuario) {

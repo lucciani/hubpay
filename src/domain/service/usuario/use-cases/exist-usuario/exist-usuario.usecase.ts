@@ -9,7 +9,7 @@ export class ExistUsuarioUseCase {
   constructor(private readonly usuarioRepository: IUsuarioRepository) {}
 
   async execute(secretId: string): Promise<AuthenticateResponseDTO> {
-    this.logger.log(`Preparando o ExistUsuarioUseCase...`);
+    this.logger.debug(`Preparando o ExistUsuarioUseCase...`);
     const usuarioAtual = await this.usuarioRepository.findBySecretId(secretId);
 
     if (!usuarioAtual) {

@@ -16,7 +16,7 @@ describe('BuscarUsuarioUseCase', () => {
         {
           provide: IUsuarioRepository,
           useValue: {
-            buscarUsuario: jest.fn(),
+            findById: jest.fn(),
           },
         },
       ],
@@ -49,20 +49,18 @@ describe('BuscarUsuarioUseCase', () => {
         mockUsuario.empresa.nome,
       );
 
-      jest
-        .spyOn(usuarioRepository, 'buscarUsuario')
-        .mockResolvedValue(mockUsuario);
+      jest.spyOn(usuarioRepository, 'findById').mockResolvedValue(mockUsuario);
 
       const result = await useCase.execute(usuarioId);
 
-      expect(usuarioRepository.buscarUsuario).toHaveBeenCalledWith(usuarioId);
+      expect(usuarioRepository.findById).toHaveBeenCalledWith(usuarioId);
       expect(result).toEqual(mockResponse);
     });
 
     it('should throw NotFoundException when the usuario does not exist', async () => {
       const usuarioId = 1;
 
-      jest.spyOn(usuarioRepository, 'buscarUsuario').mockResolvedValue(null);
+      jest.spyOn(usuarioRepository, 'findById').mockResolvedValue(null);
 
       await expect(useCase.execute(usuarioId)).rejects.toThrowError(
         new NotFoundException(
@@ -70,7 +68,7 @@ describe('BuscarUsuarioUseCase', () => {
         ),
       );
 
-      expect(usuarioRepository.buscarUsuario).toHaveBeenCalledWith(usuarioId);
+      expect(usuarioRepository.findById).toHaveBeenCalledWith(usuarioId);
     });
   });
 });

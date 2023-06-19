@@ -23,7 +23,7 @@ export class AuthService {
   ) {}
 
   async createToken(params: AuthenticateResponseDTO): Promise<TokenResponse> {
-    this.logger.log(`Gerando token.`);
+    this.logger.debug(`Gerando token.`);
     const { secretId: client, id: subject, empresaId } = params;
 
     const expiresToken = convertToUTC(
@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   async validateUser(payload: JwtPayload): Promise<AuthenticateResponseDTO> {
-    this.logger.log(`Validando token.`);
+    this.logger.debug(`Validando token.`);
     const { empresaId, id, secretId } = await this.existUsuarioUseCase.execute(
       payload.client,
     );
@@ -54,7 +54,7 @@ export class AuthService {
   }
 
   async createRefreshToken(params: AuthenticateResponseDTO): Promise<any> {
-    this.logger.log(`Gerando refresh token.`);
+    this.logger.debug(`Gerando refresh token.`);
     const { secretId: client, id: subject, empresaId } = params;
 
     const user: JwtPayload = { client, subject, empresaId };

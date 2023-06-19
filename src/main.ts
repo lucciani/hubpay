@@ -28,7 +28,7 @@ async function bootstrap() {
     const configService = app.get(ConfigService);
     app.useGlobalFilters(new AllExceptionsFilter());
 
-    Logger.log(
+    Logger.debug(
       `Environment: ${chalk
         .hex('#87e8de')
         .bold(process.env.NODE_ENV?.toUpperCase())}`,
@@ -66,7 +66,7 @@ async function bootstrap() {
     const PORT = parseInt(configService.get<string>(SERVER_PORT), 10) || 3000;
     await app.listen(PORT);
 
-    Logger.log(
+    Logger.debug(
       process.env.NODE_ENV !== 'production'
         ? `🚀  Server ready at ${await app.getUrl()}`
         : `🚀  Server is listening on port ${chalk.hex('#87e8de').bold(PORT)}`,
