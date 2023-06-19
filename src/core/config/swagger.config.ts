@@ -29,7 +29,7 @@ export const initSwagger = (app: INestApplication) => {
     document,
   );
 
-  Logger.log(
+  Logger.debug(
     `Mapped {/${configService.get(
       'GLOBAL_PREFIX',
     )}/docs, GET} Swagger api route`,

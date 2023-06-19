@@ -72,3 +72,7 @@ export const transformDateUS = (value) =>
 
 export const transformDateBR = (value) =>
   value ? dayjs(value).format(DATE_BR) : null;
+
+export const addTime = (value: number, unit?: any) => {
+  return dayjs().add(value, unit).toDate();
+};
