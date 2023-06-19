@@ -2,6 +2,6 @@
 
 export class UsuarioNotFoundException extends HttpException {
   constructor(message: string) {
-    super(message, HttpStatus.BAD_REQUEST);
+    super(message, HttpStatus.NOT_FOUND);
   }
 }
